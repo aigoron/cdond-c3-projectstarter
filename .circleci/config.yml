@@ -14,10 +14,10 @@ jobs:
   
   build-backend:
     docker:
-      - image: circleci/node:13.0.0
+      - image: circleci/node:13.8.0
       steps:
         - checkout
-        -run:
+        - run:
           name: Build back-end
           command: |
             cd backend
