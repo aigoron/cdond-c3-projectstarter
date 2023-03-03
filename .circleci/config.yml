@@ -105,7 +105,7 @@ jobs:
               --template-file .circleci/files/backend.yml \
               --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --region us-east-2 \
-              --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" \ 
+           #  --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" \ 
               --tags project=udapeople 
       - run: return 1
       - destroy-environment
@@ -115,11 +115,10 @@ jobs:
           name: Ensure front-end infrastructure exist
           command: |
             aws cloudformation deploy \
-              --template-file .circleci/files
-              /frontend.yml \
+              --template-file .circleci/files/frontend.yml \
               --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --region us-east-2 \
-              --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" \
+           # --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" \
               --tags project=udapeople 
       - run:
           name: Add back-end IP to ansible inventory
@@ -136,7 +135,23 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
-  
+  configure-infrastructure:
+    docker:
+      # Docker image here that supports Ansible
+    steps:
+      - checkout
+      # Add ssh keys with fingerprint
+      # attach workspace
+      - run:
+          name: Install dependencies
+          command: |
+            # Your code here
+            exit 1
+      - run:
+          name: Configure server
+          command: |
+            # Your code here
+            exit 1
 
 
 workflows:
