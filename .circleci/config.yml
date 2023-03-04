@@ -158,8 +158,6 @@ jobs:
           command: |
             ansible-playbook -i inventory configure-server.yml
 
-
-
 workflows:
   default:
       - build-frontend
