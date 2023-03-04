@@ -140,7 +140,7 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys:
-          fingerprints: {"d9:fa:a4:50:72:4b:e4:74:8e:37:85:a8:2e:98:94:9e"}
+          fingerprints: ["d9:fa:a4:50:72:4b:e4:74:8e:37:85:a8:2e:98:94:9e"]
       - attach_workspace:
           at: ~/
       - run: cat ~/output.txt
