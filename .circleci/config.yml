@@ -156,6 +156,7 @@ jobs:
       - run:
           name: Run Playbook and Configure Server
           command: |
+            cd .circleci/ansible
             ansible-playbook -i inventory configure-server.yml
 
 workflows:
