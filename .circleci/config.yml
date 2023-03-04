@@ -147,7 +147,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            yum -y install tar gzip
+            python -m pip install tar gzip
       - run:
           name: Install Ansible
           command: |
