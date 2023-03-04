@@ -133,29 +133,35 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
-  #configure-infrastructure:
-    #docker:
-      # Docker image here that supports Ansible
-    #steps:
-      #- checkout
-       #- add_ssh_keys:
-          #fingerprints: {"d9:fa:a4:50:72:4b:e4:74:8e:37:85:a8:2e:98:94:9e"}
-      # attach workspace
-      #- run:
-          #name: Install dependencies
-          #command: |
-            # 
-            #exit 1
-      #- run:
-          #name: Configure server
-          #command: |
-            # Your code here
-           # exit 1
+  
+  configure-infrastructure:
+    docker:
+      - image: cimg/python:3.10
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints: {"d9:fa:a4:50:72:4b:e4:74:8e:37:85:a8:2e:98:94:9e"}
+      - attach_workspace:
+          at: ~/
+      - run: cat ~/output.txt
+      - run:
+          name: Install dependencies
+          command: |
+            yum -y install tar gzip
+      - run:
+          name: Install Ansible
+          command: |
+            python -m pip install --user ansible
+            python -m pip install awscli
+      - run:
+          name: Run Playbook and Configure Server
+          command: |
+            ansible-playbook -i inventory configure-server.yml
+
 
 
 workflows:
   default:
-    jobs:
       - build-frontend
       - build-backend
       - test-frontend:
