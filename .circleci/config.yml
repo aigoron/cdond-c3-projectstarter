@@ -107,15 +107,10 @@ jobs:
               --region us-east-2 \
               --parameter-overrides ID="udapeople-${CIRCLE_WORKFLOW_ID:0:7}" \
               --tags project=udapeople
-            aws cloudformation describe-stack-events --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}"
-
-      #- run: return 1
-      - destroy-environment
-
-
       - run:
           name: Ensure front-end infrastructure exist
           command: |
+            yum -y install tar gzip
             aws cloudformation deploy \
               --template-file .circleci/files/frontend.yml \
               --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
