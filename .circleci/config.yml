@@ -144,10 +144,10 @@ jobs:
       - attach_workspace:
           at: ~/
       #- run: cat ~/inventory.txt
-      - run:
-          name: Install dependencies
-          command: |
-            python -m pip install tar gzip
+      # - run:
+      #     name: Install dependencies
+      #     command: |
+      #       python -m pip install tar gzip
       - run:
           name: Install Ansible
           command: |
