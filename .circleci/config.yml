@@ -1,138 +1,138 @@
 version: 2.1
 
-# commands:
-#   destroy-environment:
-#     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
-#     parameters:
-#       # Add parameter here   
-#     steps:
-#       - run:
-#           name: Destroy environments
-#           when: on_fail
-#           command: |
-#             aws cloudformation delete-stack --stack-name udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7} \
-#               --region us-east-2
+commands:
+  destroy-environment:
+    description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
+    parameters:
+      # Add parameter here   
+    steps:
+      - run:
+          name: Destroy environments
+          when: on_fail
+          command: |
+            aws cloudformation delete-stack --stack-name udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7} \
+              --region us-east-2
 
-# orbs:
-#   slack: circleci/slack@4.12.1
+orbs:
+  slack: circleci/slack@4.12.1
 jobs:
-#   build-frontend:
-#     docker:
-#       - image: circleci/node:13.8.0
-#     steps:
-#       - checkout
-#       - run:
-#           name: Build front-end
-#           command: |
-#             cd frontend
-#             npm install
-#             npm run build
+  build-frontend:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - run:
+          name: Build front-end
+          command: |
+            cd frontend
+            npm install
+            npm run build
 
-#   build-backend:
-#     docker:
-#       - image: circleci/node:13.8.0
-#     steps:
-#       - checkout
-#       - run:
-#           name: Build back-end
-#           command: |
-#             cd backend
-#             npm install
-#             npm run build
-#       - slack/notify:
-#           channel: ALX-C3
-#           event: fail
-#           template: basic_fail_1
-#   test-frontend:
-#     docker:
-#       - image: circleci/node:13.8.0
-#     steps:
-#       - checkout
-#       - run:
-#           name: Run Frontend test
-#           command: |
-#             cd frontend
-#             npm install
-#             npm run test
-#   test-backend:
-#     docker:
-#       - image: circleci/node:13.8.0
-#     steps:
-#       - checkout
-#       - run:
-#           name: Run Backend test
-#           command: |
-#             cd backend
-#             npm install
-#             npm run test
+  build-backend:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - run:
+          name: Build back-end
+          command: |
+            cd backend
+            npm install
+            npm run build
+      - slack/notify:
+          channel: ALX-C3
+          event: fail
+          template: basic_fail_1
+  test-frontend:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - run:
+          name: Run Frontend test
+          command: |
+            cd frontend
+            npm install
+            npm run test
+  test-backend:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - run:
+          name: Run Backend test
+          command: |
+            cd backend
+            npm install
+            npm run test
   
-#   scan-frontend:
-#     docker: 
-#       - image: circleci/node:13.8.0
-#     steps:
-#       - checkout
-#       - run:
-#           name:
-#           command: |
-#             cd frontend
-#             npm install
-#             npm audit fix --audit-level=critical --force
-#             npm audit fix --force
+  scan-frontend:
+    docker: 
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - run:
+          name:
+          command: |
+            cd frontend
+            npm install
+            npm audit fix --audit-level=critical --force
+            npm audit fix --force
   
-#   scan-backend:
-#     docker:
-#       - image: circleci/node:13.8.0 
-#     steps:
-#       - checkout
-#       - run:
-#           name:
-#           command: |
-#             cd backend
-#             npm install
-#             npm audit fix --audit-level=critical --force
-#             npm audit fix --force
-#   deploy-infrastructure:
-#     docker:
-#       - image: amazon/aws-cli
-#     steps:
-#       - checkout
-#       - run:
-#           name: Ensure back-end infrastructure exists
-#           command: |
-#             aws --version
-#             yum -y install tar gzip
-#             aws cloudformation deploy \
-#               --template-file .circleci/files/backend.yml \
-#               --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-#               --region us-east-2 \
-#               --parameter-overrides ID="udapeople-${CIRCLE_WORKFLOW_ID:0:7}" \
-#               --tags project=udapeople
-#       - run:
-#           name: Ensure front-end infrastructure exist
-#           command: |
-#             yum -y install tar gzip
-#             aws cloudformation deploy \
-#               --template-file .circleci/files/frontend.yml \
-#               --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
-#               --region us-east-2 \
-#               --parameter-overrides ID="udapeople-${CIRCLE_WORKFLOW_ID:0:7}" \
-#               --tags project=udapeople 
-#       - run:
-#           name: Add back-end IP to ansible inventory
-#           command: |
-#             touch inventory
-#             echo [all] > inventory
-#             aws ec2 describe-instances \
-#               --query 'Reservations[*].Instances[*].PublicIpAddress' \
-#               --filters "Name=tag:project,Values=udapeople" \
-#               --region us-east-2 \
-#               --output text >> inventory 
-#             cat inventory
+  scan-backend:
+    docker:
+      - image: circleci/node:13.8.0 
+    steps:
+      - checkout
+      - run:
+          name:
+          command: |
+            cd backend
+            npm install
+            npm audit fix --audit-level=critical --force
+            npm audit fix --force
+  deploy-infrastructure:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run:
+          name: Ensure back-end infrastructure exists
+          command: |
+            aws --version
+            yum -y install tar gzip
+            aws cloudformation deploy \
+              --template-file .circleci/files/backend.yml \
+              --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --region us-east-2 \
+              --parameter-overrides ID="udapeople-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --tags project=udapeople
+      - run:
+          name: Ensure front-end infrastructure exist
+          command: |
+            yum -y install tar gzip
+            aws cloudformation deploy \
+              --template-file .circleci/files/frontend.yml \
+              --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --region us-east-2 \
+              --parameter-overrides ID="udapeople-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --tags project=udapeople 
+      - run:
+          name: Add back-end IP to ansible inventory
+          command: |
+            touch inventory
+            echo [all] > inventory
+            aws ec2 describe-instances \
+              --query 'Reservations[*].Instances[*].PublicIpAddress' \
+              --filters "Name=tag:project,Values=udapeople" \
+              --region us-east-2 \
+              --output text >> inventory 
+            cat inventory
         
-#       - persist_to_workspace:
-#           root: ~/
-#           paths:
-#             - project/.circleci/ansible/inventory.txt
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project/.circleci/ansible/inventory.txt
   
   configure-infrastructure:
     docker:
@@ -156,23 +156,22 @@ jobs:
       - run:
           name: Run Playbook and Configure Server
           command: |
-            cd .circleci/ansible
             ansible-playbook -i inventory configure-server.yml
 
 workflows:
   default:
     jobs:
-      # - build-frontend
-      # - build-backend
-      # - test-frontend:
-      #     requires: [build-frontend]
-      # - test-backend:
-      #     requires: [build-backend]
-      # - scan-frontend:
-      #     requires: [build-frontend]
-      # - scan-backend:
-      #     requires: [build-backend]
-      # - deploy-infrastructure:
-      #     requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+      - build-frontend
+      - build-backend
+      - test-frontend:
+          requires: [build-frontend]
+      - test-backend:
+          requires: [build-backend]
+      - scan-frontend:
+          requires: [build-frontend]
+      - scan-backend:
+          requires: [build-backend]
+      - deploy-infrastructure:
+          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
       - configure-infrastructure
-          # requires: [deploy-infrastructure]
+          requires: [deploy-infrastructure]
