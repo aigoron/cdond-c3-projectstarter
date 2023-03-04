@@ -127,7 +127,7 @@ jobs:
               --filters "Name=tag:project,Values=udapeople" \
               --region us-east-2 \
               --output text >> inventory 
-            cat inventory.txt
+            cat inventory
         
       - persist_to_workspace:
           root: ~/
@@ -138,12 +138,13 @@ jobs:
       # Docker image here that supports Ansible
     #steps:
       #- checkout
-      # Add ssh keys with fingerprint
+       #- add_ssh_keys:
+          #fingerprints: {"d9:fa:a4:50:72:4b:e4:74:8e:37:85:a8:2e:98:94:9e"}
       # attach workspace
       #- run:
           #name: Install dependencies
           #command: |
-            # Your code here
+            # 
             #exit 1
       #- run:
           #name: Configure server
