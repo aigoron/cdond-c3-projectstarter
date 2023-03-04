@@ -36,8 +36,6 @@
   # roles:
   #   - configure-server
 
-- name: "upgrade packages."
-  become: true
   apt:
     upgrade: "yes"
 
