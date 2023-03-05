@@ -144,9 +144,9 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: 
-        name: Open Inventory file
-        command: |
-          cat ~/project/inventory
+          name: Open Inventory file
+          command: |
+            at ~/project/inventory
       # - run:
       #     name: Install dependencies
       #     command: |
