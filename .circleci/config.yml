@@ -146,7 +146,7 @@ jobs:
       - run: 
           name: Open Inventory file
           command: |
-            at ~/project/inventory
+            cat ~/project/inventory
       # - run:
       #     name: Install dependencies
       #     command: |
