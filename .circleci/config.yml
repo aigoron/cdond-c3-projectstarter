@@ -160,7 +160,7 @@ jobs:
           name: Run Playbook and Configure Server
           command: |
             cat ~/inventory.txt
-            ansible-playbook -i sinventory.txt configure-server.yml
+            ansible-playbook -i inventory.txt configure-server.yml
 
 workflows:
   default:
