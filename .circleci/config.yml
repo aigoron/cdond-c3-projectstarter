@@ -160,6 +160,7 @@ jobs:
           name: Run Playbook and Configure Server
           command: |
             cat ~/inventory.txt
+            mv ~/inventory.txt ~/circleci/project
             echo "$PWD"
             ls
             ansible-playbook -i inventory.txt configure-server.yml
