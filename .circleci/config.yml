@@ -126,7 +126,7 @@ jobs:
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --filters "Name=tag:project,Values=udapeople" \
               --region us-east-2 \
-              --output text >> inventory 
+              --output text >> ~/inventory.txt
             cat inventory
         
       - persist_to_workspace:
