@@ -120,19 +120,19 @@ jobs:
       - run:
           name: Add back-end IP to ansible inventory
           command: |
-            touch inventory
-            echo [web] > inventory
+            touch inventory.txt
+            echo [web] > inventory.txt
             aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --filters "Name=tag:project,Values=udapeople" \
               --region us-east-2 \
-              --output text >> inventory
+              --output text >> inventory.txt
             cat inventory
         
       - persist_to_workspace:
           root: ~/
           paths:
-            - inventory
+            - inventory.txt
   
   configure-infrastructure:
     docker:
