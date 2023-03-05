@@ -132,7 +132,7 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-            - project/inventory.txt
+            - inventory.txt
   
   configure-infrastructure:
     docker:
@@ -146,7 +146,7 @@ jobs:
       - run: 
           name: Open Inventory file
           command: |
-            cat ~/project/inventory
+            cat ~/inventory.txt
       # - run:
       #     name: Install dependencies
       #     command: |
