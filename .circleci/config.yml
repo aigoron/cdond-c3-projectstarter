@@ -148,7 +148,7 @@ jobs:
           command: |
             echo "$PWD"
             ls
-            cat ~/.circleci/ansible/inventory.txt
+            cat ~/project/.circleci/ansible/inventory.txt
       # - run:
       #     name: Install dependencies
       #     command: |
