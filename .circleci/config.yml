@@ -148,7 +148,7 @@ jobs:
           command: |
             echo "$PWD"
             ls
-            cat ~/project/.circleci/ansible/inventory.txt
+            cat ~/.circleci/ansible/inventory.txt
       # - run:
       #     name: Install dependencies
       #     command: |
@@ -164,6 +164,7 @@ jobs:
             echo "$PWD"
             ls
             cd .circleci/ansible
+            cat inventory.txt
             ls
             cat inventory.txt
             ansible-playbook -i inventory configure-server.yml
