@@ -121,18 +121,18 @@ jobs:
           name: Add back-end IP to ansible inventory
           command: |
             touch inventory.txt
-            echo [web] > inventory.txt
+            echo [web] > ~/inventory.txt
             aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --filters "Name=tag:project,Values=udapeople" \
               --region us-east-2 \
-              --output text >> inventory.txt
+              --output text >> ~/inventory.txt
             cat inventory.txt
         
       - persist_to_workspace:
           root: ~/
           paths:
-            - project/.circleci/ansible/inventory.txt
+            - inventory.txt
   
   configure-infrastructure:
     docker:
@@ -148,7 +148,7 @@ jobs:
           command: |
             echo "$PWD"
             ls
-            cat ~/project/.circleci/ansible/inventory.txt
+            cat inventory.txt
       # - run:
       #     name: Install dependencies
       #     command: |
