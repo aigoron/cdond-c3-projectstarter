@@ -148,7 +148,7 @@ jobs:
           command: |
             echo "$PWD"
             ls
-            cat inventory.txt
+            cat ~/inventory.txt
       # - run:
       #     name: Install dependencies
       #     command: |
