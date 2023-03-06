@@ -147,7 +147,7 @@ jobs:
           name: Open Inventory file
           command: |
             ls
-            cat project/.circleci/ansible/inventory.txt
+            cat ~/project/.circleci/ansible/inventory.txt
       # - run:
       #     name: Install dependencies
       #     command: |
