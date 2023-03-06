@@ -146,7 +146,7 @@ jobs:
       - run: 
           name: Open Inventory file
           command: |
-            cat ~/inventory.txt
+            cat project/.circleci/ansible/inventory.txt
       # - run:
       #     name: Install dependencies
       #     command: |
@@ -159,8 +159,6 @@ jobs:
       - run:
           name: Run Playbook and Configure Server
           command: |
-            cat ~/inventory.txt
-            mv ~/inventory.txt ~/project
             echo "$PWD"
             ls
             ansible-playbook -i inventory.txt configure-server.yml
