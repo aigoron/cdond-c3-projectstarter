@@ -164,6 +164,7 @@ jobs:
             cat ~/project/.circleci/ansible/inventory.txt
             echo "$PWD"
             ls
+            cd .circleci/ansible/configure-server.yml
             ansible-playbook -i inventory.txt configure-server.yml
 
 workflows:
