@@ -207,6 +207,7 @@ jobs:
     steps:
       - checkout
       - install_nodejs
+      - revert_migrations
       - run:
           name: Run migrations
           command: |
