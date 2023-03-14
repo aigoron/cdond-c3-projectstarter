@@ -5,6 +5,7 @@
     state: directory
 
 - name: "Unarchive backend files"
+  become: yes
   unarchive:
     src: files/artifact.tar.gz
     dest: .

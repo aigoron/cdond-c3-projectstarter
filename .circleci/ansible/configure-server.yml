@@ -39,5 +39,5 @@
   
   roles:
     #- configure-server
-    - deploy
+    #- deploy
 
